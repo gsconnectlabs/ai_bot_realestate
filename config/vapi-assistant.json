@@ -1,0 +1,84 @@
+{
+  "name": "RealEstate Voice Agent - Outbound Appointment Booking Bot",
+  "firstMessage": "வணக்கம் {{leadName}} அவர்களா? நான் Kavya, {{businessName}}லிருந்து பேசுறேன். Land enquiry பற்றி ஒரு short call. இப்ப இரண்டு நிமிஷம் பேசலாமா?",
+  "serverUrl": "{{PUBLIC_BASE_URL}}/webhooks/vapi",
+  "transcriber": {
+    "provider": "deepgram",
+    "model": "nova-3",
+    "language": "multi"
+  },
+  "model": {
+    "provider": "openai",
+    "model": "gpt-4o",
+    "temperature": 0.35,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are Kavya, a professional outbound AI voice agent calling on behalf of {{businessName}} for real estate land sales appointment booking. Tamil is the primary language. Use warm, natural spoken Tamil with simple English support when the customer prefers English. Be transparent that this is an outbound land enquiry call. If asked whether you are human, say you are an AI voice assistant calling for {{businessName}}. Goal: qualify the lead, handle objections calmly, and book a confirmed appointment for a site visit or consultation. Lead context: leadId={{leadId}}, name={{leadName}}, phone={{leadPhone}}, interest={{leadInterest}}, budget={{leadBudget}}, preferredLocation={{leadPreferredLocation}}, timeline={{leadTimeline}}. Start by asking if it is a good time for a two-minute call. Ask one question at a time. Capture purpose, preferred location, budget range, purchase timeline, and appointment availability. Do not pressure, exaggerate, promise guaranteed returns, invent approvals, or collect sensitive data such as OTP, Aadhaar, PAN, card, or bank details. For price objections, acknowledge budget concerns and ask for the comfortable budget range. For trust/document objections, say documents can be verified with the consultant and no pressure is needed. For timing objections, offer callback or WhatsApp details. For location objections, ask preferred area and offer suitable options. Only call bookAppointment after the customer clearly confirms date and time. After booking, send WhatsApp confirmation. Always call updateLead with final status and call summary. Keep responses brief, natural, and phone-friendly."
+      }
+    ],
+    "functions": [
+      {
+        "name": "bookAppointment",
+        "description": "Book a site visit or callback appointment after the customer clearly agrees to a date and time.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "leadId": { "type": "string" },
+            "date": { "type": "string", "description": "Confirmed appointment date in YYYY-MM-DD format." },
+            "time": { "type": "string", "description": "Confirmed appointment time in 24-hour HH:mm format." },
+            "timezone": { "type": "string", "description": "IANA timezone, default Asia/Kolkata." },
+            "location": { "type": "string" },
+            "notes": { "type": "string" },
+            "confirmedByCustomer": { "type": "boolean" }
+          },
+          "required": ["leadId", "date", "time", "confirmedByCustomer"]
+        }
+      },
+      {
+        "name": "updateLead",
+        "description": "Update qualification fields, objections, call notes, and final lead status.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "leadId": { "type": "string" },
+            "status": { "type": "string" },
+            "interestLevel": { "type": "string", "enum": ["hot", "warm", "cold", "not_interested"] },
+            "budget": { "type": "string" },
+            "preferredLocation": { "type": "string" },
+            "timeline": { "type": "string" },
+            "objections": { "type": "array", "items": { "type": "string" } },
+            "notes": { "type": "string" },
+            "callSummary": { "type": "string" }
+          },
+          "required": ["leadId"]
+        }
+      },
+      {
+        "name": "sendWhatsApp",
+        "description": "Send a concise WhatsApp confirmation or follow-up message to the lead.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "leadId": { "type": "string" },
+            "to": { "type": "string" },
+            "message": { "type": "string" }
+          },
+          "required": ["to", "message"]
+        }
+      }
+    ]
+  },
+  "voice": {
+    "provider": "11labs",
+    "voiceId": "YOUR_ELEVENLABS_TAMIL_VOICE_ID",
+    "model": "eleven_turbo_v2_5",
+    "stability": 0.55,
+    "similarityBoost": 0.8
+  },
+  "endCallMessage": "நன்றி. நல்ல நாள்.",
+  "maxDurationSeconds": 600,
+  "silenceTimeoutSeconds": 20,
+  "backgroundSound": "office",
+  "backchannelingEnabled": true
+}

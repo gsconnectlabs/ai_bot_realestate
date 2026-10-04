@@ -1,0 +1,103 @@
+[
+  {
+    "name": "bookAppointment",
+    "description": "Book a site visit or callback appointment after the customer clearly agrees to a date and time.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "leadId": {
+          "type": "string",
+          "description": "Lead ID from the call context."
+        },
+        "date": {
+          "type": "string",
+          "description": "Confirmed appointment date in YYYY-MM-DD format."
+        },
+        "time": {
+          "type": "string",
+          "description": "Confirmed appointment time in 24-hour HH:mm format."
+        },
+        "timezone": {
+          "type": "string",
+          "description": "IANA timezone, default Asia/Kolkata."
+        },
+        "location": {
+          "type": "string",
+          "description": "Site/project location or office location."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Any important appointment notes."
+        },
+        "confirmedByCustomer": {
+          "type": "boolean",
+          "description": "True only if customer agreed to this appointment."
+        }
+      },
+      "required": ["leadId", "date", "time", "confirmedByCustomer"]
+    }
+  },
+  {
+    "name": "updateLead",
+    "description": "Update qualification fields, objections, call notes, and final lead status.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "leadId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "description": "new, interested, appointment_booked, follow_up, not_interested, wrong_number, unreachable."
+        },
+        "interestLevel": {
+          "type": "string",
+          "enum": ["hot", "warm", "cold", "not_interested"]
+        },
+        "budget": {
+          "type": "string"
+        },
+        "preferredLocation": {
+          "type": "string"
+        },
+        "timeline": {
+          "type": "string"
+        },
+        "objections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "notes": {
+          "type": "string"
+        },
+        "callSummary": {
+          "type": "string"
+        }
+      },
+      "required": ["leadId"]
+    }
+  },
+  {
+    "name": "sendWhatsApp",
+    "description": "Send a concise WhatsApp confirmation or follow-up message to the lead.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "leadId": {
+          "type": "string"
+        },
+        "to": {
+          "type": "string",
+          "description": "Customer phone number in E.164 format."
+        },
+        "message": {
+          "type": "string",
+          "description": "WhatsApp message body."
+        }
+      },
+      "required": ["to", "message"]
+    }
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "id": "lead_1001",
+    "name": "Arun Kumar",
+    "phone": "+919840001001",
+    "language": "ta-IN",
+    "source": "Facebook Lead Form",
+    "interest": "Residential land",
+    "budget": "15-20 lakhs",
+    "preferredLocation": "Oragadam",
+    "timeline": "Within 3 months",
+    "status": "new",
+    "notes": "Asked for DTCP approved plots near industrial area.",
+    "appointment": null,
+    "lastCall": null,
+    "history": []
+  },
+  {
+    "id": "lead_1002",
+    "name": "Priya S",
+    "phone": "+919840001002",
+    "language": "ta-IN",
+    "source": "Google Ads",
+    "interest": "Investment land",
+    "budget": "25-30 lakhs",
+    "preferredLocation": "Sriperumbudur",
+    "timeline": "This month",
+    "status": "new",
+    "notes": "Wants EMI options and clear title documents.",
+    "appointment": null,
+    "lastCall": null,
+    "history": []
+  },
+  {
+    "id": "lead_1003",
+    "name": "Mohammed Imran",
+    "phone": "+919840001003",
+    "language": "en-IN",
+    "source": "Website",
+    "interest": "Farm land",
+    "budget": "10-15 lakhs",
+    "preferredLocation": "Chengalpattu",
+    "timeline": "Just exploring",
+    "status": "new",
+    "notes": "Prefers English with simple Tamil support.",
+    "appointment": null,
+    "lastCall": null,
+    "history": []
+  }
+]
