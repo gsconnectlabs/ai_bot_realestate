@@ -39,7 +39,7 @@ export const config = {
   },
   business: {
     name: process.env.BUSINESS_NAME || "Sri Velan Properties",
-    callbackNumber: process.env.BUSINESS_CALLBACK_NUMBER || "+919876543210",
+    callbackNumber: process.env.BUSINESS_CALLBACK_NUMBER || "+15550109999",
     location: process.env.BUSINESS_LOCATION || "Chennai",
     timezone: process.env.DEFAULT_TIMEZONE || "Asia/Kolkata"
   }

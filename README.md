@@ -149,7 +149,7 @@ curl -X POST http://localhost:3000/api/calls/outbound \
   -d '{
     "lead": {
       "name": "Suresh R",
-      "phone": "+919840009999",
+      "phone": "+15550109999",
       "language": "ta-IN",
       "interest": "Residential plot",
       "budget": "20-25 lakhs",
@@ -253,7 +253,7 @@ VAPI_MOCK_CALLS=true
 
 TWILIO_ACCOUNT_SID=your_twilio_account_sid
 TWILIO_AUTH_TOKEN=your_twilio_auth_token
-TWILIO_WHATSAPP_FROM=whatsapp:+14155238886
+TWILIO_WHATSAPP_FROM=whatsapp:+15550100000
 WHATSAPP_DRY_RUN=true
 
 GOOGLE_CALENDAR_ENABLED=false
@@ -272,7 +272,7 @@ Example lead:
 {
   "id": "lead_1001",
   "name": "Arun Kumar",
-  "phone": "+919840001001",
+  "phone": "+15550101001",
   "language": "ta-IN",
   "source": "Facebook Lead Form",
   "interest": "Residential land",
@@ -377,7 +377,7 @@ curl -X POST http://localhost:3000/api/tools/send-whatsapp \
   -H "Content-Type: application/json" \
   -d '{
     "leadId": "lead_1001",
-    "to": "+919840001001",
+    "to": "+15550101001",
     "message": "Vanakkam Arun, your site visit appointment is confirmed."
   }'
 ```
